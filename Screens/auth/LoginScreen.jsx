@@ -94,11 +94,20 @@ export default function LoginScreen({ navigation }) {
               >
                 <Text style={styles.btnTitle}>Войти</Text>
               </TouchableOpacity>
-              <Button
-                title="go to registration"
+              <TouchableOpacity
                 onPress={() => navigation.navigate("Registration")}
-                style={{ marginTop: 200, marginBottom: 0 }}
-              />
+                style={{
+                  marginTop: 20,
+                  alignSelf: "center",
+                }}
+              >
+                <Text style={{ color: "#fff" }}>
+                  Нет аккаунта?{" "}
+                  <Text style={{ fontSize: 20, color: "#ff6347" }}>
+                    Зарегистрироваться
+                  </Text>
+                </Text>
+              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
