@@ -9,6 +9,7 @@ import {
   Platform,
   KeyboardAvoidingView,
   Keyboard,
+  Image,
   TouchableWithoutFeedback,
 } from "react-native";
 import { useState } from "react";
@@ -29,47 +30,45 @@ export default function Home() {
           <View style={styles.ava}></View>
           <Text>Публикации</Text>
         </View>
-        <Image
-          source={require("../assets/images/User.jpg")}
-          style={{ width: 60, height: 60 }}
-        />
-        <Text
-          style={{
-            fontSize: 15,
-            textShadow: "rgba(0, 0, 0, 0.25)",
-          }}
-        >
-          Natali Romanova
-        </Text>
-        <Image
-          source={require("../assets/images/Rectngle.jpg")}
-          style={{ width: 343 }}
-        />
-        <Text
-          style={{
-            fontSize: 12,
-            textShadow: "rgba(0, 0, 0, 0.25)",
-          }}
-        >
-          Лес
-        </Text>
-        <Image
-          source={require("../assets/images/Rectangle2.jpg")}
-          style={{ width: 343 }}
-        />
-        <Text
-          style={{
-            fontSize: 12,
-            textShadow: "rgba(0, 0, 0, 0.25)",
-          }}
-        >
-          Море
-        </Text>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.btn}
-          onPress={keyboardHide}
-        >
+        <View>
+          <Image
+            source={require("../assets/images/User.jpg")}
+            style={{ width: 60, height: 60 }}
+          />
+          <Text
+            style={{
+              fontSize: 15,
+              textShadow: "rgba(0, 0, 0, 0.25)",
+            }}
+          >
+            Natali Romanova
+          </Text>
+          <Image
+            source={require("../assets/images/Rectangle.jpg")}
+            style={{ width: 343 }}
+          />
+          <Text
+            style={{
+              fontSize: 12,
+              textShadow: "rgba(0, 0, 0, 0.25)",
+            }}
+          >
+            Лес
+          </Text>
+          <Image
+            source={require("../assets/images/Rectangle2.png")}
+            style={{ width: 343 }}
+          />
+          <Text
+            style={{
+              fontSize: 12,
+              textShadow: "rgba(0, 0, 0, 0.25)",
+            }}
+          >
+            Море
+          </Text>
+        </View>
+        <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
           <Text style={styles.btnTitle}>+</Text>
         </TouchableOpacity>
       </TouchableWithoutFeedback>

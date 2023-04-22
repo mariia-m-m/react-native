@@ -2,6 +2,7 @@ import React from "react";
 import {
   View,
   Text,
+  Image,
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
@@ -10,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   TouchableWithoutFeedback,
+  Button,
 } from "react-native";
 import { useState } from "react";
 
@@ -19,7 +21,7 @@ const initialState = {
   password: "",
 };
 
-export default function LoginScreen() {
+export default function RegistrationScreen({ navigation }) {
   const [isShownKeyboard, setIsShownKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
 
@@ -32,10 +34,10 @@ export default function LoginScreen() {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <ImageBackground
           style={styles.image}
-          source={require("../assets/images/BGd.jpg")}
+          source={require("../../assets/images/BGd.jpg")}
         >
           <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          // behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
             <View
               style={{
@@ -48,7 +50,15 @@ export default function LoginScreen() {
                   ...styles.header,
                   marginBottom: isShownKeyboard ? 0 : 200,
                 }}
-              ></View>
+              >
+                <View
+                  style={{
+                    ...styles.ava,
+                    marginTop: isShownKeyboard ? 0 : 200,
+                  }}
+                ></View>
+                {/* <Text>Welcome</Text> */}
+              </View>
               <Text
                 style={{
                   textAlign: "center",
@@ -56,13 +66,13 @@ export default function LoginScreen() {
                   textShadow: "rgba(0, 0, 0, 0.25)",
                 }}
               >
-                Войти
+                Регистрация
               </Text>
-              <View style={{ marginTop: 16 }}>
+              <View style={{ marginTop: 32 }}>
                 <TextInput
                   style={styles.input}
-                  placeholder="Адрес электронной почты"
                   textAlign="center"
+                  placeholder="Логин"
                   onFocus={() => {
                     setIsShownKeyboard(true);
                   }}
@@ -70,9 +80,19 @@ export default function LoginScreen() {
               </View>
               <View style={{ marginTop: 16 }}>
                 <TextInput
+                  style={styles.input}
+                  textAlign="center"
+                  placeholder="Адрес электронной почты"
+                  onFocus={() => {
+                    setIsShownKeyboard(true);
+                  }}
+                />
+              </View>
+              <View style={{ marginTop: 16, marginBottom: 0 }}>
+                <TextInput
                   style={{
                     ...styles.input,
-                    marginBottom: isShownKeyboard ? 20 : 0,
+                    marginBottom: isShownKeyboard ? 0 : 20,
                   }}
                   placeholder="Пароль"
                   textAlign="center"
@@ -86,13 +106,17 @@ export default function LoginScreen() {
                 activeOpacity={0.7}
                 style={{
                   ...styles.btn,
-                  marginBottom: isShownKeyboard ? 20 : 0,
+                  marginBottom: isShownKeyboard ? 0 : 20,
                   marginTop: isShownKeyboard ? 0 : 43,
                 }}
                 onPress={keyboardHide}
               >
-                <Text style={styles.btnTitle}>Войти</Text>
+                <Text style={styles.btnTitle}>Зарегистрироваться</Text>
               </TouchableOpacity>
+              <Button
+                title="go to login"
+                onPress={() => navigation.navigate("Login")}
+              />
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -135,6 +159,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
     FontSize: 16,
     LineHeight: 19,
+    marginBottom: 0,
   },
   header: {
     alignItems: "center",
@@ -152,15 +177,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: 127,
-  },
-  text: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 0,
-    color: "#FFFFFF",
-    fontFamily: "Roboto",
-    FontSize: 16,
-    LineHeight: 19,
-    marginBottom: 20,
   },
 });
