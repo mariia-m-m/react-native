@@ -8,6 +8,8 @@ import LoginScreen from "./Screens/auth/LoginScreen";
 import Home from './Screens/Home';
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
+import { useRoute } from "./router";
+
 
 const loadApplication = async () => {
   await Font.loadAsync({
@@ -15,38 +17,19 @@ const loadApplication = async () => {
   });
 };
 
-const MainStack = createStackNavigator(); // указывает на группу навигаторов
-
-
 export default function App() {
   const [iasReady, setIasReady] = useState(false);
-
-  // if (!iasReady) {
-  //   return (
-  //     <AppLoading
-  //       startAsync={loadApplication}
-  //       onFinish={() => setIasReady(true)}
-  //       onError={console.warn}
-  //     />
-  //   );
-  // }
-
+  const routing = useRoute(true);
+  if (!iasReady) {
     return (
-      <NavigationContainer>
-        <MainStack.Navigator initialRouteName="Home">
-          <MainStack.Screen  options={{
-            headerShown: false,
-          }}
-            name="Registration" component={RegistrationScreen} />
-          <MainStack.Screen  options={{
-            headerShown: false,
-          }}
-            name="Login" component={LoginScreen} />
-          {/* <MainStack.Screen name="Home"  options={{
-            headerShown: false,
-          }} 
-          component={Home} /> */}
-        </MainStack.Navigator>
-      </NavigationContainer>
+      <AppLoading
+        startAsync={loadApplication}
+        onFinish={() => setIasReady(true)}
+        onError={console.warn}
+      />
     );
-  };
+  }
+
+  return <NavigationContainer>{routing}</NavigationContainer>;
+}
+
