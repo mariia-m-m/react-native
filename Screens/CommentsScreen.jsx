@@ -2,6 +2,7 @@ import React from "react";
 import {
   View,
   Text,
+  Image,
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
@@ -19,48 +20,47 @@ const initialState = {
   password: "",
 };
 
-export default function CommentScreen() {
+export default function CommentsScreen() {
   const [state, setState] = useState(initialState);
 
   return (
-    <View style={styles.container}>
-      <TouchableWithoutFeedback>
-        <View style={styles.header}>
-          <Text>Comments</Text>
-        </View>
-        <Image
-          source={require("../assets/images/Rectngle.jpg")}
-          style={{ width: 343 }}
-        />
-        <Text
-          style={{
-            fontSize: 12,
-            textShadow: "rgba(0, 0, 0, 0.25)",
-          }}
-        >
-          Лес
-        </Text>
-        <Image
-          source={require("../assets/images/Rectangle2.jpg")}
-          style={{ width: 343 }}
-        />
-        <Text
-          style={{
-            fontSize: 12,
-            textShadow: "rgba(0, 0, 0, 0.25)",
-          }}
-        >
-          Море
-        </Text>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.btn}
-          onPress={keyboardHide}
-        >
-          <Text style={styles.btnTitle}>+</Text>
-        </TouchableOpacity>
-      </TouchableWithoutFeedback>
-    </View>
+    <>
+      <View style={styles.container}>
+        <TouchableWithoutFeedback>
+          <View style={styles.header}>
+            <Text>Comments</Text>
+
+            <Image
+              source={require("../assets/images/Rectangle.jpg")}
+              style={{ width: 343 }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                textShadow: "rgba(0, 0, 0, 0.25)",
+              }}
+            >
+              Лес
+            </Text>
+            <Image
+              source={require("../assets/images/Rectangle2.png")}
+              style={{ width: 343 }}
+            />
+            <Text
+              style={{
+                fontSize: 12,
+                textShadow: "rgba(0, 0, 0, 0.25)",
+              }}
+            >
+              Море
+            </Text>
+            {/* <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
+              <Text style={styles.btnTitle}>+</Text>
+            </TouchableOpacity> */}
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
+    </>
   );
 }
 
