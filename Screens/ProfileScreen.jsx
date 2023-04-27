@@ -13,6 +13,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useState } from "react";
+import { Camera } from "expo-camera";
 
 const initialState = {
   login: "",

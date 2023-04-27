@@ -19,6 +19,7 @@ import { Ionicons } from "@expo/vector-icons";
 import PostScreen from "./PostScreen";
 import ProfileScreen from "./ProfileScreen";
 import CommentScreen from "./CommentsScreen";
+import CreateScreen from "./CreateScreen";
 
 const Tabs = createBottomTabNavigator();
 
@@ -45,7 +46,7 @@ const Home = () => {
       }}
     >
       <Tabs.Screen name="PostScreen" component={PostScreen} />
-      <Tabs.Screen name="CommentScreen" component={CommentScreen} />
+      <Tabs.Screen name="CreateScreen" component={CreateScreen} />
       <Tabs.Screen name="ProfileScreen" component={ProfileScreen} />
     </Tabs.Navigator>
   );

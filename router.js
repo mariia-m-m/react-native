@@ -8,15 +8,17 @@ const MainTab = createBottomTabNavigator();
 
 import LoginScreen from "./Screens/auth/LoginScreen";
 import RegistrationScreen from "./Screens/auth/RegistrationScreen";
-import PostScreen from "./Screens/PostScreen";
+import PostsScreen from "./Screens/PostsScreen";
 import CommentsScreen from "./Screens/CommentsScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
+import CreateScreen from "./Screens/CreateScreen";
 
 // icons import
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from '@expo/vector-icons'; 
 import { Ionicons } from '@expo/vector-icons'; 
+
 
 
 export const useRoute = (isAuth) => {
@@ -49,7 +51,7 @@ export const useRoute = (isAuth) => {
           ),
         }}
         name="Posts"
-        component={PostScreen}
+        component={PostsScreen}
       />
       <MainTab.Screen
         options={{
@@ -58,7 +60,7 @@ export const useRoute = (isAuth) => {
           ),
         }}
         name="Create"
-        component={CommentsScreen}
+        component={CreateScreen}
       />
       <MainTab.Screen
         options={{
