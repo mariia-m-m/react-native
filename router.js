@@ -12,12 +12,14 @@ import PostsScreen from "./Screens/PostsScreen";
 import CommentsScreen from "./Screens/CommentsScreen";
 import ProfileScreen from "./Screens/ProfileScreen";
 import CreateScreen from "./Screens/CreateScreen";
+import MapScreen from "./Screens/MapScreen";
 
 // icons import
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from '@expo/vector-icons'; 
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons'; 
 
 
 
@@ -47,7 +49,7 @@ export const useRoute = (isAuth) => {
       <MainTab.Screen
         options={{
           tabBarIcon: ({ focused, size, color }) => (
-        <AntDesign name="appstore-o" size={24} color="black" />
+        <AntDesign name="appstore-o" size={24} color= {color}  />
           ),
         }}
         name="Posts"
@@ -56,7 +58,7 @@ export const useRoute = (isAuth) => {
       <MainTab.Screen
         options={{
           tabBarIcon: ({ focused, size, color }) => (
-           <Fontisto name="plus-a" size={24} color="black" backgroundColor="FF6C00" iconStyle='{marginRight: 10}' borderRadius="5" />
+           <Fontisto name="plus-a" size={24} color= {color}  backgroundColor="FF6C00" iconStyle='{marginRight: 10}' borderRadius="5" />
           ),
         }}
         name="Create"
@@ -65,7 +67,7 @@ export const useRoute = (isAuth) => {
       <MainTab.Screen
         options={{
           tabBarIcon: ({ focused, size, color }) => (
-      <Ionicons name="md-person-outline" size={24} color="black" />
+      <Ionicons name="md-person-outline" size={24} color= {color}  />
           ),
         }}
         name="Profile"

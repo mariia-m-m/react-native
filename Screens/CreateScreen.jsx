@@ -3,31 +3,34 @@ import React, { useState, useEffect } from "react";
 import { Camera } from "expo-camera";
 // import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Location from "expo-location";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image
-} from "react-native";
+import { Permissions } from "expo";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
 const CreateScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
 
   const takePhoto = async () => {
+    // const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
+    // const locationPermission = await Permissions.askAsync(Permissions.LOCATION);
+    // if (
+    //   cameraPermission.status === "granted" &&
+    //   locationPermission.status === "granted"
+    // ) {
     const photo = await camera.takePictureAsync();
     // const location = await Location.getCurrentPositionAsync();
-    // console.log("latitude", location.coords.latitude);
-    // console.log("longitude", location.coords.longitude);
     setPhoto(photo.uri);
     console.log("photo", photo);
-    console.log("camera", camera)
+    console.log("camera", camera);
+    //   } else {
+    //     console.log("Error camera permission");
+    //   }
+    ``;
   };
 
   const sendPhoto = () => {
     console.log("navigation", navigation);
-    navigation.navigate("Posts", { photo });
+    navigation.navigate("DefaultScreen", { photo });
   };
 
   return (
