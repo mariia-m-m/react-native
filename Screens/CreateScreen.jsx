@@ -5,6 +5,7 @@ import { Camera } from "expo-camera";
 import * as Location from "expo-location";
 import { Permissions } from "expo";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const CreateScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
@@ -40,17 +41,24 @@ const CreateScreen = ({ navigation }) => {
           <View style={styles.takePhotoContainer}>
             <Image
               source={{ uri: photo }}
-              style={{ height: 200, width: 200, borderRadius: 10 }}
+              style={{ width: 240, borderRadius: 10 }}
             />
           </View>
         )}
         <TouchableOpacity onPress={takePhoto} style={styles.snapContainer}>
-          <Text style={styles.snap}>SNAP</Text>
+          <MaterialIcons
+            name="enhance-photo-translate"
+            size={24}
+            color="#BDBDBD"
+          />
         </TouchableOpacity>
       </Camera>
       <View>
+        <Text style={{ alignItems: "center", justifyContent: "center" }}>
+          Загрузите фото
+        </Text>
         <TouchableOpacity onPress={sendPhoto} style={styles.sendBtn}>
-          <Text style={styles.sendLabel}>SEND</Text>
+          <Text style={styles.sendLabel}>Опубликовать</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -74,13 +82,14 @@ const styles = StyleSheet.create({
   },
   snapContainer: {
     borderWidth: 1,
-    borderColor: "#ff0000",
-    width: 70,
-    height: 70,
-    borderRadius: 10,
+    borderColor: "white",
+    width: 60,
+    height: 60,
+    borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 20,
+    backgroundColor: "white",
   },
   takePhotoContainer: {
     position: "absolute",
@@ -92,17 +101,18 @@ const styles = StyleSheet.create({
   },
   sendBtn: {
     marginHorizontal: 30,
-    height: 40,
+    height: 51,
     borderWidth: 2,
-    borderColor: "#20b2aa",
-    borderRadius: 10,
+    borderColor: "#FF6C00",
+    borderRadius: 20,
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#FF6C00",
   },
   sendLabel: {
-    color: "#20b2aa",
-    fontSize: 20,
+    color: "#ffff",
+    fontSize: 16,
   },
 });
 
