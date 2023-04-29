@@ -12,21 +12,20 @@ const CreateScreen = ({ navigation }) => {
   const [photo, setPhoto] = useState(null);
 
   const takePhoto = async () => {
-    // const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
-    // const locationPermission = await Permissions.askAsync(Permissions.LOCATION);
-    // if (
-    //   cameraPermission.status === "granted" &&
-    //   locationPermission.status === "granted"
-    // ) {
-    const photo = await camera.takePictureAsync();
-    // const location = await Location.getCurrentPositionAsync();
-    setPhoto(photo.uri);
-    console.log("photo", photo);
-    console.log("camera", camera);
-    //   } else {
-    //     console.log("Error camera permission");
-    //   }
-    ``;
+    const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
+    const locationPermission = await Permissions.askAsync(Permissions.LOCATION);
+    if (
+      cameraPermission.status === "granted" &&
+      locationPermission.status === "granted"
+    ) {
+      const photo = await camera.takePictureAsync();
+      const location = await Location.getCurrentPositionAsync();
+      setPhoto(photo.uri);
+      console.log("photo", photo);
+      console.log("camera", camera);
+    } else {
+      console.log("Error camera permission");
+    }
   };
 
   const sendPhoto = () => {

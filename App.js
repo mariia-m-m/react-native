@@ -6,6 +6,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { useRoute } from "./router";
+import { Provider } from '@reduxjs/toolkit';
+import {store} from "./redux/store"
+
 
 
 // const loadApplication = async () => {
@@ -27,6 +30,6 @@ export default function App() {
   //   );
   // }
 
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  return <Provider store = {store}><NavigationContainer>{routing}</NavigationContainer></Provider>;
 }
 
