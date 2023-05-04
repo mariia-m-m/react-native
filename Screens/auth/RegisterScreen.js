@@ -14,6 +14,9 @@ import {
   Button,
 } from "react-native";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { authSignUpUser } from "../../redux/auth/authOperations";
 
 const initialState = {
   login: "",
@@ -21,13 +24,17 @@ const initialState = {
   password: "",
 };
 
-export default function RegistrationScreen({ navigation }) {
+export default function RegisterScreen({ navigation }) {
   const [isShownKeyboard, setIsShownKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
+  const dispatch = useDispatch();
 
-  const keyboardHide = () => {
-    setIsShownKeyboard(true);
+  const handleSubmit = () => {
+    setIsShownKeyboard(false);
     Keyboard.dismiss();
+
+    dispatch.authSignUpUser(state);
+    setState(initialState);
   };
   return (
     <View style={styles.container}>
@@ -109,7 +116,7 @@ export default function RegistrationScreen({ navigation }) {
                   marginBottom: isShownKeyboard ? 0 : 20,
                   marginTop: isShownKeyboard ? 0 : 43,
                 }}
-                onPress={keyboardHide}
+                onPress={handleSubmit}
               >
                 <Text style={styles.btnTitle}>Зарегистрироваться</Text>
               </TouchableOpacity>

@@ -1,79 +1,95 @@
 import React from "react";
-
-import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-const AuthStack = createStackNavigator();
-const MainTab = createBottomTabNavigator();
-
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+//! Screens
 import LoginScreen from "./Screens/auth/LoginScreen";
-import RegistrationScreen from "./Screens/auth/RegistrationScreen";
-import PostsScreen from "./Screens/PostsScreen";
-import CommentsScreen from "./Screens/CommentsScreen";
-import ProfileScreen from "./Screens/ProfileScreen";
+import RegisterScreen from "./Screens/auth/RegisterScreen";
 import CreateScreen from "./Screens/CreateScreen";
-import MapScreen from "./Screens/MapScreen";
+import PostScreen from "./Screens/PostScreen";
+import ProfileScreen from "./Screens/ProfileScreen";
+import ContactsScreen from "./Screens/CommentsScreen";
+//! icons
+import {   
+    Entypo ,
+  Feather,
+  Ionicons,
+  AntDesign,
+} from "@expo/vector-icons";
 
-// icons import
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { Fontisto } from '@expo/vector-icons'; 
-import { Ionicons } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons'; 
-
-
-
-export const useRoute = (isAuth) => {
-  if (!isAuth) {
+const MainTab = createBottomTabNavigator();
+const AuthStack = createNativeStackNavigator();
+const useRoute = (isLogin) => {
+  if (!isLogin) {
     return (
       <AuthStack.Navigator>
         <AuthStack.Screen
-          options={{
-            headerShown: false,
-          }}
           name="Login"
           component={LoginScreen}
+          options={{ headerShown: false }}
         />
+
         <AuthStack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="Registration"
-          component={RegistrationScreen}
+          name="Register"
+          component={RegisterScreen}
+          options={{ headerShown: false }}
         />
       </AuthStack.Navigator>
     );
   }
   return (
-    <MainTab.Navigator tabBarOptions={{ showLabel: false }}>
+    <MainTab.Navigator
+      screenOptions={{
+        tabBarStyle: { backgroundColor: "#fff" },
+        tabBarActiveTintColor: "#007AFF",
+        tabBarInactiveTintColor: "#8E8E93",
+        tabBarLabelStyle: { fontSize: 10, fontWeight: "bold" },
+        tabBarIconStyle: { marginBottom: -9 },
+        tabBarShowLabel: false,
+        // tabBarIndicatorStyle: { backgroundColor: "#007AFF", height: 4 },
+      }}
+    >
       <MainTab.Screen
-        options={{
-          tabBarIcon: ({ focused, size, color }) => (
-        <AntDesign name="appstore-o" size={24} color= {color}  />
-          ),
-        }}
         name="Posts"
-        component={PostsScreen}
+        component={PostScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Entypo name="news" size={25} color={color} />
+          ),
+          headerShown: false,
+        }}
       />
       <MainTab.Screen
-        options={{
-          tabBarIcon: ({ focused, size, color }) => (
-           <Fontisto name="plus-a" size={24} color= {color}  backgroundColor="FF6C00" iconStyle='{marginRight: 10}' borderRadius="5" />
-          ),
-        }}
         name="Create"
         component={CreateScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="ios-create-outline" size={25} color={color} />
+          ),
+          headerShown: false,
+        }}
       />
       <MainTab.Screen
-        options={{
-          tabBarIcon: ({ focused, size, color }) => (
-      <Ionicons name="md-person-outline" size={24} color= {color}  />
-          ),
-        }}
         name="Profile"
         component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="user" size={25} color={color} />
+          ),
+          headerShown: false,
+        }}
       />
+      {/* <MainTab.Screen
+        name="Contacts"
+        component={ContactsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="contacts" size={25} color={color} />
+          ),
+            headerShown: false,
+          
+        }}
+      /> */}
     </MainTab.Navigator>
   );
 };
-
+export default useRoute;

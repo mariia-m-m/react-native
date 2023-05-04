@@ -8,7 +8,7 @@ import CommentsScreen from "./CommentsScreen";
 
 const NestedScreen = createStackNavigator();
 
-const PostsScreen = () => {
+const PostScreen = () => {
   return (
     <NestedScreen.Navigator>
       <NestedScreen.Screen
@@ -20,4 +20,4 @@ const PostsScreen = () => {
     </NestedScreen.Navigator>
   );
 };
-export default PostsScreen;
+export default PostScreen;
