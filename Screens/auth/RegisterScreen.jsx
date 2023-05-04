@@ -16,7 +16,7 @@ import {
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { authSignUpUser } from "../../redux/auth/authOperations";
+import { authSignUp } from "../../redux/auth/authOperations";
 
 const initialState = {
   login: "",
@@ -33,7 +33,7 @@ export default function RegisterScreen({ navigation }) {
     setIsShownKeyboard(false);
     Keyboard.dismiss();
 
-    dispatch.authSignUpUser(state);
+    dispatch(authSignUp(state));
     setState(initialState);
   };
   return (
@@ -67,11 +67,13 @@ export default function RegisterScreen({ navigation }) {
                 {/* <Text>Welcome</Text> */}
               </View>
               <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 30,
-                  textShadow: "rgba(0, 0, 0, 0.25)",
-                }}
+                style={
+                  {
+                    // textAlign: "center",
+                    // fontSize: 30,
+                    // textShadow: "rgba(0, 0, 0, 0.25)",
+                  }
+                }
               >
                 Регистрация
               </Text>
@@ -170,11 +172,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   btnTitle: {
-    color: "#FFFFFF",
-    fontFamily: "Roboto",
-    FontSize: 16,
-    LineHeight: 19,
-    marginBottom: 0,
+    // color: "#FFFFFF",
+    // fontFamily: "Roboto",
+    // FontSize: 16,
+    // LineHeight: 19,
+    // marginBottom: 0,
   },
   header: {
     alignItems: "center",
