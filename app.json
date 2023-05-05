@@ -1,10 +1,11 @@
 {
   "expo": {
-    "name": "APP",
-    "slug": "APP",
+    "name": "React Native Project",
+    "slug": "React Native App",
+    "description": "This app was made for practice as homework for GOIT",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/spc.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
