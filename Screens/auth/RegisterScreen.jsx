@@ -60,29 +60,24 @@ export default function RegisterScreen({ navigation }) {
                 marginBottom: isShownKeyboard ? 10 : 100,
               }}
             >
-              <Image
-                source={require("../../assets/favicon.png")}
-                style={styles.ico}
-              />
-
               <Text
                 style={{
-                  fontFamily: "Cagliostro",
-                  fontSize: 30,
                   textAlign: "center",
-                  color: "azure",
+                  fontSize: 30,
+                  textShadow: "rgba(0, 0, 0, 0.25)",
                 }}
               >
-                Please register first
+                Регистрация
               </Text>
               <View>
-                <Text style={styles.inputTitle}>Name</Text>
+                <Text style={styles.inputTitle}></Text>
                 <TextInput //! Name Input
                   autoCapitalize={"none"}
                   onFocus={() => setIsShownKeyboard(true)}
                   autoComplete={"off"}
                   style={styles.input}
                   textAlign={"center"}
+                  placeholder="Логин"
                   value={name}
                   name={name}
                   onChangeText={(value) =>
@@ -91,13 +86,14 @@ export default function RegisterScreen({ navigation }) {
                 />
               </View>
               <View>
-                <Text style={styles.inputTitle}>Email</Text>
+                <Text style={styles.inputTitle}></Text>
                 <TextInput //! Email Input
                   autoCapitalize={"none"}
                   onFocus={() => setIsShownKeyboard(true)}
                   autoComplete={"off"}
                   // placeholder="example-email@com"
                   style={styles.input}
+                  placeholder="Адрес электронной почты"
                   textAlign={"center"}
                   value={email}
                   name={email}
@@ -107,13 +103,14 @@ export default function RegisterScreen({ navigation }) {
                 />
               </View>
               <View style={{ marginBottom: 25 }}>
-                <Text style={styles.inputTitle}>Password</Text>
+                <Text style={styles.inputTitle}></Text>
                 <TextInput //! Password input
                   onFocus={() => setIsShownKeyboard(true)}
                   // placeholder="password"
                   value={state.password}
                   name={password}
                   style={styles.input}
+                  placeholder="Пароль"
                   textAlign={"center"}
                   secureTextEntry={true}
                   onChangeText={(value) =>
@@ -141,10 +138,8 @@ export default function RegisterScreen({ navigation }) {
                     fontFamily: "Cagliostro",
                   }}
                 >
-                  Already register?{" "}
-                  <Text style={{ textDecorationLine: "underline" }}>
-                    Sign in
-                  </Text>
+                  Уже есть аккаунт?{" "}
+                  <Text style={{ textDecorationLine: "underline" }}>Войти</Text>
                 </Text>
               </TouchableOpacity>
             </View>
@@ -171,16 +166,11 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    // width: 360,
-
     borderWidth: 1,
-    borderRadius: 7,
-    borderColor: "#000000",
     height: 50,
-    borderColor: "#f0ffff",
-    backgroundColor: "#f0ffff",
-    // marginBottom: 20,
-    // paddingLeft: 5,
+    borderColor: "#f0f8ff",
+    borderRadius: 8,
+    backgroundColor: "#F6F6F6",
   },
   image: {
     flex: 1,

@@ -40,17 +40,14 @@ export default function LoginScreen({ navigation }) {
     Dimensions.addEventListener("change", onChange);
   }, []);
 
-
   const keyboardHide = () => {
     Keyboard.dismiss();
 
     dispatch(authSignIn(state));
     setState("");
-
   };
   const { email, password } = state;
 
-  
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
@@ -68,22 +65,23 @@ export default function LoginScreen({ navigation }) {
                 //  marginBottom: isShownKeyboard ? 10 : 100,
               }}
             >
-              <Image
-                source={require("../../assets/favicon.png")}
-                style={styles.ico}
-              />
-              {/* { (!isShownKeyboard) &&  <Image
-                 source={require("./assets/favicon.png")}
-                 style={styles.ico}
-               />} */}
               <View>
-                
-                <Text style={styles.inputTitle}> Email</Text>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 30,
+                    textShadow: "rgba(0, 0, 0, 0.25)",
+                  }}
+                >
+                  Войти
+                </Text>
+
+                <Text style={styles.inputTitle}></Text>
                 <TextInput //! Email Input
                   autoCapitalize={"none"}
                   onFocus={() => setIsShownKeyboard(true)}
                   autoComplete={"off"}
-                  // placeholder="example-email@com"
+                  placeholder="Адрес электронной почты"
                   style={styles.input}
                   textAlign={"center"}
                   value={email}
@@ -94,11 +92,10 @@ export default function LoginScreen({ navigation }) {
                 />
               </View>
               <View style={{ marginTop: 10, marginBottom: 25 }}>
-                
-                <Text style={styles.inputTitle}>Password</Text>
+                <Text style={styles.inputTitle}></Text>
                 <TextInput //! Password input
                   onFocus={() => setIsShownKeyboard(true)}
-                  // placeholder="password"
+                  placeholder="Пароль"
                   value={state.password}
                   name={password}
                   style={styles.input}
@@ -126,13 +123,12 @@ export default function LoginScreen({ navigation }) {
                     color: "#007AFF",
                     fontSize: 12,
                     marginTop: 15,
-                    fontFamily: "Cagliostro",
                   }}
                 >
-                  First time here?{" "}
+                  Еще нет аккаунта?{" "}
                   <Text style={{ textDecorationLine: "underline" }}>
                     {" "}
-                    Sign up!
+                    Регистрация
                   </Text>{" "}
                 </Text>
               </TouchableOpacity>
@@ -217,5 +213,4 @@ const styles = StyleSheet.create({
     marginLeft: 130,
     marginBottom: 20,
   },
-  
 });

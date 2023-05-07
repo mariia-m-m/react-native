@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "React Native Project",
-    "slug": "React Native App",
+    "slug": "React-Native-App",
     "description": "This app was made for practice as homework for GOIT",
     "version": "1.0.0",
     "orientation": "default",
@@ -16,16 +16,23 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mariiamm.ReactNativeApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mariiamm.ReactNativeApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1f7b74d6-2377-4821-87ce-97aa7ce357f2"
+      }
     }
   }
 }

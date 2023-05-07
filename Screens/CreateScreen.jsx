@@ -1,41 +1,141 @@
-import React, { useState, useEffect } from "react";
-// import { View, Text, StyleSheet, Image } from "react-native";
-import { Camera } from "expo-camera";
-// import { TouchableOpacity } from "react-native-gesture-handler";
+import React, { useState, useEffect, useRef } from "react";
+import { Camera, CameraType } from "expo-camera";
 import * as Location from "expo-location";
 import { Permissions } from "expo";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
+import { app, db, storage } from "../firebase/config";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
+
+import * as ImageManipulator from "expo-image-manipulator";
 
 const CreateScreen = ({ navigation }) => {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [photoCard, setPhotoCard] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [photoURL, setPhotoURL] = useState(null);
+  const [message, setMessage] = useState("");
+  const [startCamera, setStartCamera] = useState(null);
+  const [type, setType] = useState(CameraType.back);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
+  const { userId, name } = useSelector((state) => state.auth);
 
-  const takePhoto = async () => {
-    const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
-    const locationPermission = await Permissions.askAsync(Permissions.LOCATION);
-    if (
-      cameraPermission.status === "granted" &&
-      locationPermission.status === "granted"
-    ) {
-      const photo = await camera.takePictureAsync();
-      const location = await Location.getCurrentPositionAsync();
-      setPhoto(photo.uri);
-      console.log("photo", photo);
-      console.log("camera", camera);
+  const cameraRef = useRef(null);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+      const location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+  function toggleCameraType() {
+    console.log("FLIP");
+    setType((current) =>
+      current === CameraType.back ? CameraType.front : CameraType.back
+    );
+  }
+
+  const _startCamera = async () => {
+    const { status } = await Camera.requestCameraPermissionsAsync();
+    if (status === "granted") {
+      setStartCamera(true);
     } else {
-      console.log("Error camera permission");
+      Alert.alert("Access denied!");
     }
   };
 
+  const resizeImage = async (uri, maxWidth, maxHeight) => {
+    const result = await ImageManipulator.manipulateAsync(
+      uri,
+      [
+        {
+          resize: {
+            width: maxWidth,
+            height: maxHeight,
+          },
+        },
+      ],
+      {
+        compress: 0.7,
+        format: ImageManipulator.SaveFormat.JPEG,
+      }
+    );
+
+    return result.uri;
+  };
+
+  const takePhoto = async () => {
+    const location = await Location.getCurrentPositionAsync({});
+    setLocation(location);
+    const photo = await cameraRef.current.takePictureAsync();
+
+    // Изменение размера изображения перед установкой состояния photoCard
+    const resizedPhotoUri = await resizeImage(photo.uri, 800, 800);
+    setPhotoCard(resizedPhotoUri);
+    console.log("photo ==> ", photo.uri);
+    console.log("message ==>", message);
+  };
+
   const sendPhoto = () => {
-    console.log("navigation", navigation);
-    navigation.navigate("DefaultScreen", { photo });
+    uploadPostToServer();
+    navigation.navigate("DefaultScreen");
+  };
+
+  const uploadPhotoToServer = async () => {
+    if (!photoURL) return;
+
+    try {
+      console.log("TRIED TO SEND PHOTO");
+      const response = await fetch(photoCard);
+      const file = await response.blob();
+      const id = Date.now().toString();
+
+      const reference = ref(storage, `images/${id}`);
+      const result = await uploadBytesResumable(reference, file);
+      const processedPhoto = await getDownloadURL(result.ref);
+      console.log("processedPhoto", processedPhoto);
+      setPhotoURL(processedPhoto);
+      console.log("photoURL AFTER", photoURL);
+      await db.storage().ref(`images/${id}`).put(file);
+    } catch (err) {
+      console.log(err.message);
+      Alert.alert("Try again \n", err.message);
+    }
+  };
+  const uploadPostToServer = async () => {
+    await uploadPhotoToServer();
+    try {
+      const createPost = await addDoc(collection(db, "posts"), {
+        photoURL,
+        location: location.coords,
+        message,
+        location,
+        userId,
+        name,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} ref={setCamera}>
+      <Camera style={styles.camera} ref={cameraRef}>
         {photo && (
           <View style={styles.takePhotoContainer}>
             <Image
